@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Certificate — Processing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #0f172a;
+      --bg2: #071024;
+      --card: rgba(255,255,255,0.04);
+      --accent: linear-gradient(90deg,#7c3aed,#06b6d4);
+      --glass: rgba(255,255,255,0.06);
+      --muted: rgba(255,255,255,0.7);
+      --radius: 14px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.12), transparent), radial-gradient(900px 500px at 90% 90%, rgba(6,182,212,0.07), transparent), linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#e6eef8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .card{
+      width:100%;
+      max-width:720px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      display:flex;
+      gap:24px;
+      align-items:center;
+    }
+
+    .left{
+      min-width:120px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .badge{
+      width:96px;
+      height:96px;
+      border-radius:20px;
+      background:linear-gradient(180deg,#0b1220 0%, rgba(255,255,255,0.02) 100%);
+      border:1px solid rgba(255,255,255,0.04);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .spinner{
+      width:56px;height:56px;border-radius:50%;
+      background:conic-gradient(from 180deg at 50% 50%, rgba(124,58,237,0.85), rgba(6,182,212,0.8) 40%, rgba(255,255,255,0.06) 70%);
+      animation:spin 1.6s linear infinite;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 20px rgba(12,18,35,0.6);
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .right{flex:1}
+    h1{margin:0;font-size:20px;font-weight:700;letter-spacing:-0.2px}
+    p.lead{margin:8px 0 18px;color:var(--muted);font-size:15px}
+
+    .dots{display:flex;gap:8px;align-items:center}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.08)}
+    .dot:nth-child(1){animation:pulse 1.2s infinite 0s}
+    .dot:nth-child(2){animation:pulse 1.2s infinite 0.15s}
+    .dot:nth-child(3){animation:pulse 1.2s infinite 0.3s}
+    @keyframes pulse{0%{transform:scale(1);opacity:0.4}50%{transform:scale(1.4);opacity:1}100%{transform:scale(1);opacity:0.4}}
+
+    .meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .pill{background:var(--glass);padding:8px 12px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
+
+    .actions{margin-top:18px;display:flex;gap:12px}
+    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+    .btn.primary{background:var(--accent);background-clip:padding-box;color:white;box-shadow:0 8px 20px rgba(124,58,237,0.18);}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    footer{margin-top:18px;color:rgba(255,255,255,0.45);font-size:13px}
+
+    @media (max-width:640px){
+      .card{flex-direction:column;align-items:stretch;padding:20px}
+      .left{order:2}
+      .right{order:1}
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="region" aria-labelledby="status-title">
+    <div class="left" aria-hidden="true">
+      <div class="badge">
+        <div class="spinner" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <h1 id="status-title">Your certificate is processing</h1>
+      <p class="lead">Your certificate is currently being processed. This may take a few minutes or, in some cases, a couple of days. You will be notified once it is ready.</p>
+
+      <div class="meta">
+        <div class="pill">Reference: <strong style="margin-left:8px">#JM-2025-00123</strong></div>
+        <div class="dots" aria-hidden="true">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" onclick="alert('Status check requested — this is a demo button.')">Check status</button>
+        <button class="btn ghost" onclick="navigator.clipboard?.writeText('#JM-2025-00123').then(()=>alert('Reference copied'))">Copy reference</button>
+      </div>
+
+      <footer>Need a faster update? Contact <a href="mailto:jmtechinstitute@gmail.com" style="color:inherit;text-decoration:underline;">jmtechinstitute@gmail.com</a> or <a href="tel:+917708397173" style="color:inherit;text-decoration:underline;">+91 7708397173</a></footer>
+    </div>
+  </main>
+</body>
+</html>
